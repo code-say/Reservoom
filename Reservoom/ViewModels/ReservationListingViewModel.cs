@@ -20,6 +20,8 @@ namespace Reservoom.ViewModels
         {
             _reservation = new ObservableCollection<ReservationViewModel>();
 
+            //MakeReservationCommand = new NavigationCommands();
+
             _reservation.Add(new ReservationViewModel(new Reservation(new RoomID(1, 2), "SingletonSean", DateTime.Now, DateTime.Now)));
             _reservation.Add(new ReservationViewModel(new Reservation(new RoomID(3, 2), "Joe", DateTime.Now, DateTime.Now)));
             _reservation.Add(new ReservationViewModel(new Reservation(new RoomID(2, 4), "Mary", DateTime.Now, DateTime.Now)));
