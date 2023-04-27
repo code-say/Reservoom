@@ -13,6 +13,8 @@ namespace Reservoom.ViewModels
 {
     public class ReservationListingViewModel : ViewModelBase
     {
+        private Hotel _hotel;
+
         //private NavigationStore navigationStore;
 
         private readonly ObservableCollection<ReservationViewModel> _reservation;
@@ -21,15 +23,26 @@ namespace Reservoom.ViewModels
 
         public ICommand MakeReservationCommand{ get; }
 
-        public ReservationListingViewModel(NavigationStore navigationStore, Func<MakeReservationViewModel> createMakeReservationViewModel)
+        public ReservationListingViewModel(Hotel hotel, Services.NavigationService makeReservationViewNavigationService)
         {
+            _hotel = hotel;
             _reservation = new ObservableCollection<ReservationViewModel>();
 
-            MakeReservationCommand = new NavigateCommand(navigationStore, createMakeReservationViewModel);
+            MakeReservationCommand = new NavigateCommand(makeReservationViewNavigationService);
 
-            _reservation.Add(new ReservationViewModel(new Reservation(new RoomID(1, 2), "SingletonSean", DateTime.Now, DateTime.Now)));
-            _reservation.Add(new ReservationViewModel(new Reservation(new RoomID(3, 2), "Joe", DateTime.Now, DateTime.Now)));
-            _reservation.Add(new ReservationViewModel(new Reservation(new RoomID(2, 4), "Mary", DateTime.Now, DateTime.Now)));
+            UpdateReservation();
+
+        }
+
+        private void UpdateReservation()
+        {
+            _reservation.Clear();
+
+            foreach (Reservation reservation in _hotel.GetAllReservations())
+            {
+                ReservationViewModel reservationViewModel = new ReservationViewModel(reservation);
+                _reservation.Add(reservationViewModel);
+            }
         }
     }
 }

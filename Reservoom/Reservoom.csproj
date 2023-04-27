@@ -22,6 +22,9 @@
     <Compile Update="Models\Reservation.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Update="Services\NavigationService.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Update="Stores\NavigationStore.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
